@@ -9,7 +9,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import os
 import sys
 import urllib.parse
 from pathlib import Path
@@ -43,7 +42,7 @@ def create_folder_name(base_url):
             folder_name = "nyaa_torrents"
 
         return sanitize_filename(folder_name)
-    except:
+    except Exception:
         return "nyaa_torrents"
 
 def extract_title_from_row(row):
@@ -232,7 +231,7 @@ def get_torrent_links_from_page(session, url):
                 torrents.append({
                     'title': torrent_title,
                     'download_url': download_url,
-                    'filename': sanitize_filename(torrent_title) + '.torrent'
+                    'filename': f"{sanitize_filename(torrent_title)}.torrent"
                 })
 
             except Exception as e:
